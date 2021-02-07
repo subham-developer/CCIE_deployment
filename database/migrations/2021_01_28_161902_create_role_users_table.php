@@ -17,6 +17,7 @@ class CreateRoleUsersTable extends Migration
             $table->increments('id');
             $table->integer('role_id');
             $table->integer('user_id');
+            $table->enum('status', ['1', '0'])->default('1');
             $table->timestamps();
         });
     }

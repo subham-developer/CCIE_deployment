@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Role;
+use App\Event;
 
 class User extends Authenticatable
 {
@@ -16,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'role_id', 'password',
+        'name', 'email', 'role_id', 'city', 'country', 'dob', 'phone', 'password',
     ];
 
     /**
@@ -35,5 +36,10 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->hasOne(Role::class);
+    }
+
+    public function events()
+    {
+        return $this->hasMany(Event::class);
     }
 }

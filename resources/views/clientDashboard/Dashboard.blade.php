@@ -27,8 +27,8 @@
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="info-box blue-bg">
               <i class="fa fa-cloud-download"></i>
-              <div class="count">{{ count($data) }}</div>
-              <div class="title">Total Slot Booked</div>
+              <div class="count"></div>
+              <div class="title">Total Live Posts</div>
             </div>
             <!--/.info-box-->
           </div>
@@ -37,9 +37,9 @@
 
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="info-box green-bg">
-              <i class="fa fa-user-md"></i>
-              <div class="count">{{ count($users) }}</div>
-              <div class="title">No. of Users</div>
+              <i class="fa fa-cubes"></i>
+              <div class="count"></div>
+              <div class="title">Total Posts</div>
             </div>
             <!--/.info-box-->
           </div>
@@ -48,8 +48,8 @@
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="info-box brown-bg">
               <i class="fa fa-shopping-cart"></i>
-              <div class="count">{{ count($racks) }}</div>
-              <div class="title">Total Racks Available</div>
+              <div class="count"></div>
+              <div class="title">Total Live Categories</div>
             </div>
             <!--/.info-box-->
           </div>
@@ -57,9 +57,9 @@
 
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="info-box dark-bg">
-              <i class="fa fa-cubes"></i>
-              <div class="count">{{ count($ccies) }}</div>
-              <div class="title">Total CCIE Categories</div>
+              <i class="fa fa-thumbs-o-up"></i>
+              <div class="count"></div>
+              <div class="title">Total Categories</div>
             </div>
             <!--/.info-box-->
           </div>
@@ -73,21 +73,21 @@
 
         <div class="row">
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            {{-- <div class="info-box blue-bg">
+            <div class="info-box blue-bg">
               <i class="fa fa-cloud-download"></i>
               <div class="count"></div>
               <div class="title">Total Live Motivational Images</div>
-            </div> --}}
+            </div>
             <!--/.info-box-->
           </div>
           <!--/.col-->
 
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            {{-- <div class="info-box blue-bg">
+            <div class="info-box blue-bg">
               <i class="fa fa-cloud-download"></i>
               <div class="count"></div>
               <div class="title">Total Motivational Images</div>
-            </div> --}}
+            </div>
             <!--/.info-box-->
           </div>
           <!--/.col-->
@@ -95,20 +95,7 @@
         </div>
         <!--/.row-->
 
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
+
 
 
         

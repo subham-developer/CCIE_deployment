@@ -69,7 +69,7 @@ class LoginController extends Controller
                     // $contact = 9004728301;
                     // $otpSend = User::sendOtpSmsData($contact);
                     // dd($otpSend);
-                    return '/Home';
+                    return '/student/clients';
                     break;
                 }
         }

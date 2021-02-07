@@ -4,7 +4,7 @@ use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class RolsTableSeeder extends Seeder
+class CcieTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,9 +14,9 @@ class RolsTableSeeder extends Seeder
     public function run()
     {
         //
-        DB::table('roles')->insert([
-            'name' => 'Client',
-            'slug' => Str::slug('Client', '-'),
+        DB::table('ccies')->insert([
+            'name' => 'Enterprise Wireless',
+            'slug' => Str::slug('Enterprise Wireless', '-'),
             'created_at' => now(),
             'updated_at' => now(),
         ]);

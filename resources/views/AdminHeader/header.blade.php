@@ -13,6 +13,7 @@
 
   <title>CCIE Lab Center</title>
 
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
   <!-- Bootstrap CSS -->
   <link href="{{url('Admin/css/bootstrap.min.css')}}" rel="stylesheet">
   <!-- bootstrap theme -->
@@ -36,12 +37,15 @@
   <link href="{{url('Admin/css/style-responsive.css')}}" rel="stylesheet" />
   <link href="{{url('Admin/css/xcharts.min.css')}}" rel=" stylesheet">
   <link href="{{url('Admin/css/jquery-ui-1.10.4.min.css')}}" rel="stylesheet">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <!-- =======================================================
     Theme Name: NiceAdmin
     Theme URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
     Author: BootstrapMade
     Author URL: https://bootstrapmade.com
   ======================================================= -->
+  @yield('style')
 </head>
 <body>
   <!-- container section start -->
@@ -312,9 +316,39 @@
       </div>
     </header>
      <!--header end-->
-
+     <aside>
+      @if (Auth::user()->role_id == 1)
+      <div id="sidebar" class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu">
+          <li class="active">
+            <a class="" href="{{ url('/Dashboard') }}">
+                          <i class="icon_house_alt"></i>
+                          <span>Dashboard</span>
+                      </a>
+          </li>
+          <li>
+            <a class="" href="{{route('profile')}}">
+                <i class="fa fa-user-md"></i>
+                <span>Profile</span>
+            </a>
+          </li>
+          <li>
+            <a class="" href="{{route('view-clients')}}">
+                <i class="icon_profile"></i>
+                <span>Clients</span>
+            </a>
+          </li>
+          <li>
+            <a class="" href="{{route('calendar')}}">
+                <i class="icon_calendar"></i>
+                <span>Calendar</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+        @elseif(Auth::user()->role_id == 2)
     <!--sidebar start-->
-    <aside>
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu">
@@ -354,31 +388,31 @@
                       </a>
           </li> -->
           <li>
-            <a class="" href="{{route('view-clients')}}">
-                <i class="icon_piechart"></i>
-                <span>Clients</span>
+            <a class="" href="{{route('profile')}}">
+                <i class="fa fa-user-md"></i>
+                <span>Profile</span>
             </a>
           </li>
           <li>
-            <a class="" href="{{url('/CategoryView')}}">
-                <i class="icon_piechart"></i>
-                <span>Category</span>
+            <a class="" href="{{route('calendar')}}">
+                <i class="icon_calendar"></i>
+                <span>Events</span>
             </a>
           </li>
-          <li>
+          {{-- <li>
             <a class="" href="{{url('/uploadImage')}}">
                 <i class="icon_image"></i>
                 <span>Upload Images</span>
             </a>
-          </li>
-          <li>
+          </li> --}}
+          {{-- <li>
             <a class="" href="{{ url('/showMoticationalGallery') }}">
                 <i class="icon_image"></i>
                 <span>Gallery</span>
             </a>
-          </li>
+          </li> --}}
 
-          <li class="sub-menu">
+          {{-- <li class="sub-menu">
             <a href="{{ url('/PostView') }}" class="">
                           <i class="icon_table"></i>
                           <span>Posts</span>
@@ -387,7 +421,7 @@
             <!-- <ul class="sub">
               <li><a class="" href="basic_table.html">Basic Table</a></li>
             </ul> -->
-          </li>
+          </li> --}}
 
           <!-- <li class="sub-menu">
             <a href="javascript:;" class="">
@@ -407,6 +441,7 @@
         </ul>
         <!-- sidebar menu end-->
       </div>
+      @endif
     </aside>
     <!--sidebar end-->
 
@@ -434,7 +469,7 @@
             Licensing information: https://bootstrapmade.com/license/
             Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
           -->
-          Designed by <a href="http://www.subhamlal.com" target="_blank">Shubham Lal</a>
+          Designed by <a href="https://www.simplylearnanything.com" target="_blank">Simply Learn Anything</a>
         </div>
       </div>
     </section>
@@ -469,7 +504,7 @@
     <script src="{{url('Admin/assets/chart-master/Chart.js')}}"></script>
 
     <!--custome script for all page-->
-    <script src="js/scripts.js"></script>
+    <script src="{{ url('Admin/js/scripts.js') }}"></script>
     <!-- custom script for this page-->
     <script src="{{url('Admin/js/sparkline-chart.js')}}"></script>
     <script src="{{url('Admin/js/easy-pie-chart.js')}}"></script>
@@ -484,6 +519,7 @@
     <script src="{{url('Admin/js/charts.js')}}"></script>
     <script src="{{url('Admin/js/jquery.slimscroll.min.js')}}"></script>
     <!-- <script src="{{ asset('js/app.js') }}"></script> -->
+    
     <script>
       //knob
       $(function() {
@@ -529,6 +565,7 @@
         });
       });
     </script>
+    @yield('script')
 
 </body>
 

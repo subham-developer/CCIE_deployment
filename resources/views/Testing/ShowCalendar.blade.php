@@ -8,11 +8,11 @@
         <!--overview start-->
         <div class="row">
           <div class="col-lg-12">
-            <h3 class="page-header"><i class="fa fa-laptop"></i> Clients</h3>
+            <h3 class="page-header"><i class="fa fa-laptop"></i> Events</h3>
             <ol class="breadcrumb">
               <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
               <li><i class="icon_documents_alt"></i>Pages</li>
-              <li><i class="fa fa-laptop"></i>Clients</li>
+              <li><i class="fa fa-laptop"></i>Show Events</li>
             </ol>
           </div>
         </div>
@@ -43,7 +43,7 @@
           </div> 
         @endif
         <div class="btn-group" style="padding-left: 20px; padding-bottom: 20px;">
-            <a class="btn btn-primary" href="{{ route('create-clients') }}"><i class="icon_plus_alt2"></i> New Clients</a>
+            <a class="btn btn-primary" href="{{ route('calendar') }}"><i class="icon_plus_alt2"></i> View Calendar</a>
         </div>
             <div class="col-lg-12 col-lg-12 col-sm-12 col-xs-12">
                 <table class="table table-striped table-advance table-hover">
@@ -51,95 +51,71 @@
                         <tr>
                             <th>
                                 <i class="icon_profile"></i>
-                                Role
+                                Category Name
                             </th>
                             <th>
-                                Name
+                                Rack Name
                             </th>
                             <th>
-                                <i class="icon_calendar"></i>
-                                Email / Username
-                            </th>
-                            <th>
-                                <i class="icon_calendar"></i>
-                                D.O.B
+                                Start Date
                             </th>
                             <th>
                                 <i class="icon_calendar"></i>
-                                Contact No.
+                               End Date
                             </th>
-                            <th>
-                                <i class="icon_calendar"></i>
-                                City
-                            </th>
-                            <th>
-                                <i class="icon_calendar"></i>
-                                Country
-                            </th>
-                            <th>
+                            {{-- <th>
                                 <i class="icon_pin_alt"></i>
-                                status
-                            </th>
+                                Status
+                            </th> --}}
+                            @if(Auth::user()->role_id == 1)
                             <th>
                                 <i class="icon_cogs"></i>
                                 Action
                             </th>
+                            @endif
                         </tr>
-                        @foreach($clientList as $post)
+                        @foreach($eventsList as $post)
                             <tr>
-                                @if($post->role_id == 1)
+                                <td>
+                                    {{ $post->ccie->name }}
+                                </td>
+                                <td>
+                                    {{ $post->racks->name }}
+                                </td>
+                                <td>
+                                    {{ date('d-m-Y g:i A', strtotime($post->start_date)) }}
+                                </td>
+                                <td>
+                                    {{ date('d-m-Y g:i A', strtotime($post->end_date)) }}
+                                </td>
+                                {{-- @if($post->role_id == 1)
                                     <td>
                                         Admin
                                     </td>
                                 @else 
                                     <td>
-                                        Client
+                                        Clients
                                     </td>
-                                @endif
-                                <td>
-                                    {{ $post->name }}
-                                </td>
-                                <td>
-                                    {{ $post->email }}
-                                </td>
-                                <td>
-                                    {{ $post->dob }}
-                                </td>
-                                <td>
-                                    {{ $post->phone }}
-                                </td>
-                                <td>
-                                    {{ $post->city }}
-                                </td>
-                                <td>
-                                    {{ $post->country }}
-                                </td>
-                                @if($post->status == 1)
-                                    <td>
-                                        Active
-                                    </td>
-                                @else 
-                                    <td>
-                                        Deactive
-                                    </td>
-                                @endif
+                                @endif --}}
+                                @if(Auth::user()->role_id == 1)
                                 <td>
                                     <div class="btn-group">
-                                        <a class="btn btn-primary" href="{{ url('/edit/profile') }}/{{ $post->id }}"><i class="icon_plus_alt2"></i></a>
+                                        <a class="btn btn-primary" href="{{ url('/edit/calendar') }}/{{ $post->id }}">Edit Events <i class="icon_plus_alt2"></i></a>
                                         {{-- @if($post->status == 1)
                                         <a class="btn btn-success" href="{{ url('/updatePostStatus') }}/{{ $post->id }}"><i class="icon_check_alt2"></i></a>
                                         @else
                                         <a class="btn btn-warning" href="{{ url('/updatePostStatus') }}/{{ $post->id }}"><i class="icon_check_alt2"></i></a>
-                                        @endif --}}
-                                        {{-- <a class="btn btn-danger" href="{{ url('/deletePostStatus') }}/{{ $post->id }}"><i class="icon_close_alt2"></i></a> --}}
+                                        @endif
+                                        <a class="btn btn-danger" href="{{ url('/deletePostStatus') }}/{{ $post->id }}"><i class="icon_close_alt2"></i></a> --}}
                                     </div>
                                 </td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
                 <div>
-                    {{ $clientList->links() }}
+                    {{-- {{ $eventsList->links() }} --}}
                 </div>
             </div>
         </div>

@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Ccie;
+use App\Event;
+use App\Rack;
+use App\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,11 +28,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        dd(123);
+        return redirect('/login');
+        // return view('home');
     }
 
     public function Dashboard()
     {
-        return view('AdminDashboard.Dashboard');
+        $data = Event::all();
+        $users = User::where('role_id', '!=', 1)->get();
+        $ccies = Ccie::all();
+        $racks = Rack::all();
+        return view('AdminDashboard.Dashboard', compact('data', 'users', 'ccies', 'racks'));
     }
 }

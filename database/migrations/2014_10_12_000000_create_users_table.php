@@ -19,7 +19,12 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('role_id');
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('city');
+            $table->string('country');
+            $table->date('dob');
+            $table->string('phone');
             $table->string('password');
+            $table->enum('status', ['1', '0'])->default('1');
             $table->rememberToken();
             $table->timestamps();
         });

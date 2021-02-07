@@ -7,6 +7,9 @@ use Validator;
 use Response;
 use App\Client;
 use App\User;
+use Calendar;
+// use MaddHatter\LaravelFullcalendar\Calendar;
+use App\Event;
 
 class ClientController extends Controller
 {
@@ -18,9 +21,30 @@ class ClientController extends Controller
     public function index()
     {
         //
+        $events = [];
+        $data = Event::all();
+        if($data->count()) {
+            foreach ($data as $key => $value) {
+                $events[] = Calendar::event(
+                    $value->title,
+                    true,
+                    new \DateTime($value->start_date),
+                    new \DateTime($value->end_date.' +1 day'),
+                    null,
+                    // Add color and link on event
+	                [
+	                    'color' => '#f05050',
+	                    'url' => 'pass here url and any route',
+	                ]
+                );
+            }
+        }
+        $calendar = Calendar::addEvents($events);
+
+
         $clientList = User::paginate(5);
         // dd($clientList);
-        return view('AdminDashboard.ViewClientsList',compact('clientList'));
+        return view('AdminDashboard.ViewClientsList',compact('clientList', 'calendar'));
     }
 
     /**
@@ -56,6 +80,10 @@ class ClientController extends Controller
         $validator = Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'dob' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'country' => 'required|string|max:255',
+            'phone' => 'required|string|max:255',
             'password' => 'required|string|min:6|confirmed',
         ]);
         if($validator->fails())
@@ -63,11 +91,13 @@ class ClientController extends Controller
             // return Response::json(array(
             //     'errors' => $validator->getMessageBag()->toArray()
             // ));
-            return \Redirect::back()->withErrors($validator);
+            return \Redirect::back()->withErrors($validator)->withInput();
+            // withInput(Input::except('password', 'password_confirm'));
             // return redirect('store-clients');
         }
         else 
         {
+            // dd($data);
             // $data = New Role();
             // $data->name = $request->rolename;
             // $data->display_name = $request->display_name;

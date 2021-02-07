@@ -4,7 +4,8 @@ use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class RolsTableSeeder extends Seeder
+
+class RackTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,9 +15,9 @@ class RolsTableSeeder extends Seeder
     public function run()
     {
         //
-        DB::table('roles')->insert([
-            'name' => 'Client',
-            'slug' => Str::slug('Client', '-'),
+        DB::table('racks')->insert([
+            'name' => 'Rack 3',
+            'slug' => Str::slug('Rack 3', '-'),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
