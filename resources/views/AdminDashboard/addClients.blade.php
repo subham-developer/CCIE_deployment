@@ -1,6 +1,7 @@
 @extends('AdminHeader.header')
 
 @section('content')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.ckeditor.com/4.12.1/full/ckeditor.js"></script>
 <section id="main-content">
       <section class="wrapper">
@@ -74,6 +75,16 @@
                     <input type="text" name="phone" value="{{ old('phone') }}" @if($errors->has('phone')) {{ $errors->first('phone') }} style="border: 1px solid #00a0df" @endif placeholder="Enter Contact Number" class="form-control">
                     <span style="color: #00a0df; font-size: 10px;">@if($errors->has('phone')) {{ $errors->first('phone') }} @endif</span>
                     <br/>
+                    <label for="">Select CCIE Track</label>
+                    <span class="required">*</span>
+                    <select class="form-control js-example-basic-multiple" name="ccie[]" multiple="multiple" @if($errors->has('ccie')) {{ $errors->first('ccie') }} style="border: 1px solid #00a0df" @endif name="ccie" id="">
+                        <option value=""><--- Select Your Track ---></option>
+                        @foreach($ccie_track as $ccie)
+                            <option @if(old('ccie') == $ccie->id) Selected @endif value="{{ $ccie->id }}">{{ $ccie->name }}</option>
+                        @endforeach
+                    </select>
+                    <span style="color: #00a0df; font-size: 10px;">@if($errors->has('ccie')) {{ $errors->first('ccie') }} @endif</span>
+                    <br/>
                     {{-- <label for="">Password</label> --}}
                     {{-- <input type="password" name="password" value="" placeholder="Enter User Password" class="form-control"> --}}
                     {{-- <br/> --}}
@@ -82,5 +93,11 @@
             </div>
         </div>
 </section>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('.js-example-basic-multiple').select2();
+  });
+</script>
 
 @endsection

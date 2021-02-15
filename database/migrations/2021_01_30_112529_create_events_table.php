@@ -18,8 +18,9 @@ class CreateEventsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('ccie_id');
             $table->unsignedBigInteger('rack_id');
-            $table->string('title');
+            // $table->string('title');
             // $table->string('color');
+            $table->string('timezone');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->enum('status', ['1', '0'])->default('1');

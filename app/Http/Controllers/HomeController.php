@@ -28,7 +28,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        dd(123);
+        // dd(123);
         return redirect('/login');
         // return view('home');
     }

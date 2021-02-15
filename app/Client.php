@@ -9,12 +9,12 @@ class Client extends Model
 {
     //
     protected $table = 'users';
-    protected $fillable = ['name','role_id','email', 'city', 'country', 'dob', 'phone', 'password'];
+    protected $fillable = ['name','role_id','email', 'city', 'country', 'dob', 'phone', 'ccie', 'password'];
 
     public static function create(array $data)
     {
         // dd($data);
-        return User::create([
+        $userEntry =  User::create([
             'name' => $data['name'],
             'role_id' => 2,
             'email' => $data['email'],
@@ -24,6 +24,11 @@ class Client extends Model
             'phone' => $data['phone'],
             'password' => bcrypt($data['password']),
         ]);
+
+        $ccies = Ccie::find($data['ccie']);
+        $userEntry->ccies()->attach($ccies);
+
+        return;
         // $registerNewUser= new Bank_detail();
         // $registerNewUser->name=$data['name'];
         // $registerNewUser->email=$data['email'];

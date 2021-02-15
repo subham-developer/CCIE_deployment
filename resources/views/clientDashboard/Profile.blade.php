@@ -28,7 +28,7 @@
                 <div class="follow-ava">
                   <img src="{{ url('/Admin/img/dummy-male.jpg') }}" alt="">
                 </div>
-                <h6>@if(Auth::user()->role_id == 1) Admin @else User @endif</h6>
+                <h6>@if(Auth::user()->role_id == 1) {{Auth::user()->timezone}}Admin @else User @endif</h6>
               </div>
               <div class="col-lg-4 col-sm-4 follow-info">
                 <p>Hello I’m {{ $profiles[0]['name'] }}, a leading expert in interactive and creative design.</p>

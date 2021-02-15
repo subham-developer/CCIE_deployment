@@ -50,11 +50,18 @@
                     <tbody>
                         <tr>
                             <th>
+                                {{-- <i class="icon_profile"></i> --}}
+                                User Name
+                            </th>
+                            <th>
                                 <i class="icon_profile"></i>
                                 Category Name
                             </th>
                             <th>
                                 Rack Name
+                            </th>
+                            <th>
+                                Timezone
                             </th>
                             <th>
                                 Start Date
@@ -77,10 +84,16 @@
                         @foreach($eventsList as $post)
                             <tr>
                                 <td>
+                                    {{ $post->users->name }}
+                                </td>
+                                <td>
                                     {{ $post->ccie->name }}
                                 </td>
                                 <td>
                                     {{ $post->racks->name }}
+                                </td>
+                                <td>
+                                    {{ $post->timezone }}
                                 </td>
                                 <td>
                                     {{ date('d-m-Y g:i A', strtotime($post->start_date)) }}

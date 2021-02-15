@@ -1,10 +1,8 @@
 <?php
 
-use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
-class RolsTableSeeder extends Seeder
+class CcieUserTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,9 +12,9 @@ class RolsTableSeeder extends Seeder
     public function run()
     {
         //
-        DB::table('roles')->insert([
-            'name' => 'Client',
-            'slug' => Str::slug('client', '-'),
+        DB::table('ccie_user')->insert([
+            'ccie_id' => 3,
+            'user_id' => 2,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

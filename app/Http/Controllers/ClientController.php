@@ -7,9 +7,11 @@ use Validator;
 use Response;
 use App\Client;
 use App\User;
+use App\Ccie;
 use Calendar;
 // use MaddHatter\LaravelFullcalendar\Calendar;
 use App\Event;
+use Auth;
 
 class ClientController extends Controller
 {
@@ -55,7 +57,15 @@ class ClientController extends Controller
     public function create()
     {
         //
-        return view('AdminDashboard.addClients');
+
+        $categories = User::find(Auth::user()->role_id);
+        $ccie_track = Ccie::get();
+        // dd($categories->ccies->name);
+        // foreach ($categories->ccies as $role) {
+        //     //
+        //     dd($role->name);
+        // }
+        return view('AdminDashboard.addClients', compact('categories', 'ccie_track'));
     }
 
     /**
@@ -84,6 +94,7 @@ class ClientController extends Controller
             'city' => 'required|string|max:255',
             'country' => 'required|string|max:255',
             'phone' => 'required|string|max:255',
+            'ccie' => 'required|array|max:255',
             'password' => 'required|string|min:6|confirmed',
         ]);
         if($validator->fails())

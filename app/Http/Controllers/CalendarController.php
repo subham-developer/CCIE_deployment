@@ -46,7 +46,9 @@ class CalendarController extends Controller
                     $color = "#3a87ad";
                 }
                 $events[] = Calendar::event(
-                    $value->title,
+                    $value->ccie->name,
+                    // $value->racks->name,
+                    // $value->timezone,
                     false,
                     new \DateTime($value->start_date),
                     new \DateTime($value->end_date),
@@ -91,7 +93,7 @@ class CalendarController extends Controller
         //
         $this->validate($request,[
             // 'title' => 'required',
-            // 'color' => 'required',
+            'timezone' => 'required',
             'ccie' => 'required',
             'rack' => 'required',
             'start_date' => 'required',
@@ -102,10 +104,11 @@ class CalendarController extends Controller
         // {
         //     return \Redirect::back()->withErrors($validator)->withInput();
         // }
-        // dd($request->start_date);
+        $timeZoneRecieved = $request->timezone;
+        // dd($request->all());
         // $new_start_date = Carbon::parse($request->start_date)->addHour(4)->toDateTimeString();
-        $start_date = Carbon::parse($request->start_date)->toDateTimeString();
-        $end_date = Carbon::parse($request->start_date)->addHour(4)->toDateTimeString();
+        $start_date = Carbon::parse($request->start_date)->timezone($timeZoneRecieved)->toDateTimeString();
+        $end_date = Carbon::parse($request->start_date)->addHour(4)->timezone($timeZoneRecieved)->toDateTimeString();
         $totalDuration =  Carbon::parse($request->start_date)->diffInHours($end_date);
         // print_r($start_date);
         // print_r($end_date);
@@ -118,7 +121,7 @@ class CalendarController extends Controller
 
 
         // Checking if same slot is already booked
-        $gettingBookedSlots = Event::where('rack_id', $request->rack)->where('start_date', $start_date)->count();
+        $gettingBookedSlots = Event::where('rack_id', $request->rack)->where('timezone', $request->timezone)->where('start_date', $start_date)->count();
         if($gettingBookedSlots > 0){
             return redirect()->back()->with('message-error', 'This slot has already been booked')->withInput();
         }
@@ -128,7 +131,7 @@ class CalendarController extends Controller
         // $gettingBookedSlotBetweenDates = Event::where('rack_id', $request->rack)->whereBetween('end_date', [$start_date, $end_date])->orderBy('end_date','DESC')->get();
 
         // second check of a users input startdate
-        $gettingBookedSlotBetweenDatesWithStartDate = Event::where('rack_id', $request->rack)->whereBetween('start_date', [$start_date, $end_date])->orderBy('end_date','DESC')->get();
+        $gettingBookedSlotBetweenDatesWithStartDate = Event::where('rack_id', $request->rack)->where('timezone', $request->timezone)->whereBetween('start_date', [$start_date, $end_date])->orderBy('end_date','DESC')->get();
         if(!$gettingBookedSlotBetweenDatesWithStartDate->isEmpty()){
             return redirect()->back()->with('message-error', 'You cannot select this slot')->withInput();
         }
@@ -137,7 +140,7 @@ class CalendarController extends Controller
         //     return redirect()->back()->with('message-error', 'This slot has already been booked');
         // }
         // second check of a users input startdate
-        $gettingBookedSlotBetweenDatesWithEndDate = Event::where('rack_id', $request->rack)->whereBetween('end_date', [$start_date, $end_date])->orderBy('end_date','DESC')->get();
+        $gettingBookedSlotBetweenDatesWithEndDate = Event::where('rack_id', $request->rack)->where('timezone', $request->timezone)->whereBetween('end_date', [$start_date, $end_date])->orderBy('end_date','DESC')->get();
         // dd($gettingBookedSlotBetweenDatesWithEndDate);
         if(!$gettingBookedSlotBetweenDatesWithEndDate->isEmpty()){
             return redirect()->back()->with('message-error', 'You cannot select end this slot')->withInput();
@@ -169,11 +172,12 @@ class CalendarController extends Controller
         }
 
         $events = new Event;
-        $events->title = $rack_title;
+        // $events->title = $rack_title;
         // $events->color = $request->color;
         $events->user_id = Auth::user()->id;
         $events->ccie_id = $request->ccie;
         $events->rack_id = $request->rack;
+        $events->timezone = $request->timezone;
         $events->start_date = $start_date;
         $events->end_date = $end_date;
         $events->save();
@@ -211,8 +215,12 @@ class CalendarController extends Controller
         $eventsList = Event::find($id);
         $formated_start_date = Carbon::parse($eventsList->start_date)->format('d/m/Y g:i A');
         $formated_end_date = Carbon::parse($eventsList->end_date)->format('g:i A');
+
+
+
+        // $timeZoneTimeConversion = Carbon::now()->timezone('Atlantic/Azores')->toDateTimeString();
         // format('g:i A')
-        // dd($eventsList);
+        // dd($timeZoneTimeConversion);
         return view('Testing.EditCalendar', compact('eventsList', 'formated_start_date', 'formated_end_date', 'ccie_track', 'racks', 'id'));
     }
 
