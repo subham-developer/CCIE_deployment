@@ -11,8 +11,16 @@
 |
 */
 
+use App\Mail\WelcomeMail;
+use Illuminate\Support\Facades\Mail;
+
 Route::get('/', function () {
     return view('welcome');
+});
+Route::get('/emails', function () {
+    // return view('welcome');
+    Mail::to('shubhamlal@nimapinfotech.com')->send(new WelcomeMail());
+    return new WelcomeMail;
 });
 
 Auth::routes();
@@ -39,3 +47,4 @@ Route::get('/delete/calendar', 'CalendarController@destroy')->name('delete-calen
 Route::get('/student/clients', 'StudentController@index')->name('student-clients');
 Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::get('/edit/profile/{id}', 'ProfileController@edit')->name('edit-profile');
+Route::post('/update/profile', 'ProfileController@update')->name('update-profile');

@@ -35,11 +35,10 @@
                 <p>@ {{ $profiles[0]['name'] }}</p>
                 <p><i class="fa fa-twitter">{{ $profiles[0]['name'] }}</i></p>
                 <h6>
-                    
-                                  <span><i class="icon_clock_alt"></i>{{ now()->format('g:i A') }}</span>
-                                  <span><i class="icon_calendar"></i>{{ now()->format('d/m/Y') }}</span>
-                                  <span><i class="icon_pin_alt"></i>{{ strtoupper($profiles[0]['country']) }}</span>
-                              </h6>
+                    <span><i class="icon_clock_alt"></i>{{ now()->format('g:i A') }}</span>
+                    <span><i class="icon_calendar"></i>{{ now()->format('d/m/Y') }}</span>
+                    <span><i class="icon_pin_alt"></i>{{ strtoupper($profiles[0]['country']) }}</span>
+                </h6>
               </div>
               <div class="col-lg-2 col-sm-6 follow-info weather-category">
                 <ul>

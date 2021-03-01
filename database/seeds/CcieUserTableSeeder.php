@@ -13,7 +13,7 @@ class CcieUserTableSeeder extends Seeder
     {
         //
         DB::table('ccie_user')->insert([
-            'ccie_id' => 3,
+            'ccie_id' => 2,
             'user_id' => 2,
             'created_at' => now(),
             'updated_at' => now(),

@@ -15,8 +15,8 @@ class CcieTableSeeder extends Seeder
     {
         //
         DB::table('ccies')->insert([
-            'name' => 'Securities',
-            'slug' => Str::slug('Securities', '-'),
+            'name' => 'Abc',
+            'slug' => Str::slug('Abc', '-'),
             'created_at' => now(),
             'updated_at' => now(),
         ]);

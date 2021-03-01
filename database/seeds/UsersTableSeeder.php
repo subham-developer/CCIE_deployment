@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Shubham Lal',
             'role_id' => 2,
-            'email' => 'shubham@gmail.com',
+            'email' => 'shubhamlal@gmail.com',
             'city' => 'Mumbai',
             'country' => 'India',
             'dob' => now(),

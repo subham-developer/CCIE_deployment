@@ -16,7 +16,7 @@ class RolsTableSeeder extends Seeder
         //
         DB::table('roles')->insert([
             'name' => 'Client',
-            'slug' => Str::slug('client', '-'),
+            'slug' => Str::slug('Client', '-'),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
